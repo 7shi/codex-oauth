@@ -3,12 +3,10 @@
 Sample implementation of OAuth access to OpenAI's **WHAM** backend using the
 `openai-python` library.
 
-**WHAM** (Workspace-Handled Agent Model) is an internal backend used by the Codex CLI,
-available at `https://chatgpt.com/backend-api/wham`. It requires OAuth tokens rather than
-standard API keys and uses an API surface that differs from the public Chat Completions API.
-A ChatGPT **Pro or Plus** account is required (subject to change).
-
 The sample implementation is in [codex_oauth.py](codex_oauth.py).
+
+- This is a minimal sample for OAuth access to WHAM from Python, not a production-ready auth framework.
+- Device-code (headless) authentication is out of scope for the current implementation.
 
 > **Note**: The API behavior documented here was reverse-engineered from the
 > [Codex CLI](https://github.com/openai/codex) and [OpenCode](https://github.com/anomalyco/opencode)
@@ -23,12 +21,6 @@ This repository is provided **AS IS**, with **NO WARRANTY** of any kind (express
 implied), including but not limited to merchantability, fitness for a particular purpose,
 and non-infringement. You assume all risks and are solely responsible for any use,
 misuse, or consequences arising from it.
-
-### Scope / Non-goals
-
-- This is a minimal sample for OAuth access to WHAM from Python, not a production-ready auth framework.
-- Device-code (headless) authentication is out of scope for the current implementation.
-- The API behavior described here is unofficial and may change without notice.
 
 ## Requirements
 
@@ -74,6 +66,9 @@ The `test` and `list` commands automatically refresh the OAuth token before maki
 - This repository already ignores `auth.json` via `.gitignore`, but you remain responsible for handling exported logs/backups safely.
 
 ## WHAM API Specifics
+
+**WHAM** (Workspace-Handled Agent Model) is an internal backend used by the Codex CLI.
+It requires OAuth tokens rather than standard API keys and uses an API surface that differs from the public Chat Completions API.
 
 ### Endpoints & Constants
 
