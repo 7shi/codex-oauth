@@ -16,6 +16,9 @@ The sample implementation is in `codex_oauth.py`.
 >
 > **Warning**: As of the time this repository was created, OpenAI does not explicitly
 > prohibit third-party OAuth usage with these credentials, but this may change at any time.
+> This repository is provided **"AS IS"**, with **NO WARRANTY** of any kind (express or
+> implied), including but not limited to merchantability, fitness for a particular purpose,
+> and non-infringement. You are solely responsible for any use or consequences.
 > **USE AT YOUR OWN RISK.**
 
 ## Requirements
@@ -28,11 +31,12 @@ Dependencies (`pyproject.toml`):
 ```toml
 dependencies = [
     "authlib>=1.6.8",
+    "httpx>=0.28.1",
     "openai>=2.21.0",
 ]
 ```
 
-`httpx` is used at runtime for token refresh and is pulled in as a transitive dependency.
+`httpx` is used at runtime for token refresh and is declared as a direct dependency.
 
 ## Setup & Usage
 
@@ -46,6 +50,25 @@ uv run codex_oauth.py list            # fetch available models, saves models.jso
 ```
 
 The `test` and `list` commands automatically refresh the OAuth token before making API requests if it is expired or near expiry.
+
+## Troubleshooting
+
+- Browser launch/callback issues (`login`): this implementation requires a local browser-based OAuth flow via `http://localhost:1455/auth/callback`.
+- Headless environments: a device-code authentication flow is a possible alternative, but it is **not implemented** in this repository.
+- `CSRF error: state mismatch`: retry `login` from scratch and complete the callback in the same browser session.
+- HTTP 401 during `test`/`list`: token refresh is attempted automatically once; if it still fails, run `login` again to regenerate `auth.json`.
+
+## Security Notes
+
+- `auth.json` contains bearer credentials (`access` and `refresh`) and should be treated as a secret.
+- Do not share, commit, or upload `auth.json` to source control or external services.
+- This repository already ignores `auth.json` via `.gitignore`, but you remain responsible for handling exported logs/backups safely.
+
+## Scope / Non-goals
+
+- This is a minimal sample for OAuth access to WHAM from Python, not a production-ready auth framework.
+- Device-code (headless) authentication is out of scope for the current implementation.
+- The API behavior described here is unofficial and may change without notice.
 
 ## WHAM API Specifics
 

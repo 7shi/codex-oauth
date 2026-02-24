@@ -2,7 +2,6 @@ import argparse
 import base64
 import json
 import time
-
 import httpx
 from openai import OpenAI, AuthenticationError
 
@@ -147,7 +146,7 @@ def cmd_login():
     from urllib.parse import parse_qs, urlparse
     from authlib.integrations.httpx_client import OAuth2Client
 
-    # SCOPE and REDIRECT_URI are used only inside cmd_login.
+    # REDIRECT_URI and SCOPE are used only inside cmd_login.
     REDIRECT_URI = "http://localhost:1455/auth/callback"
     SCOPE        = "openid profile email offline_access"
 
