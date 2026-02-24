@@ -1,0 +1,10 @@
+[project]
+name = "codex_oauth"
+version = "0.0.1"
+description = "Sample OAuth implementation for OpenAI's WHAM backend"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "authlib>=1.6.8",
+    "openai>=2.21.0",
+]
