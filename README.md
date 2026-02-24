@@ -24,6 +24,12 @@ implied), including but not limited to merchantability, fitness for a particular
 and non-infringement. You assume all risks and are solely responsible for any use,
 misuse, or consequences arising from it.
 
+### Scope / Non-goals
+
+- This is a minimal sample for OAuth access to WHAM from Python, not a production-ready auth framework.
+- Device-code (headless) authentication is out of scope for the current implementation.
+- The API behavior described here is unofficial and may change without notice.
+
 ## Requirements
 
 - Python 3.13+
@@ -54,24 +60,18 @@ uv run codex_oauth.py list            # fetch available models, saves models.jso
 
 The `test` and `list` commands automatically refresh the OAuth token before making API requests if it is expired or near expiry.
 
-## Troubleshooting
+### Troubleshooting
 
 - Browser launch/callback issues (`login`): this implementation requires a local browser-based OAuth flow via `http://localhost:1455/auth/callback`.
 - Headless environments: a device-code authentication flow is a possible alternative, but it is **not implemented** in this repository.
 - `CSRF error: state mismatch`: retry `login` from scratch and complete the callback in the same browser session.
 - HTTP 401 during `test`/`list`: token refresh is attempted automatically once; if it still fails, run `login` again to regenerate `auth.json`.
 
-## Security Notes
+### Security Notes
 
 - `auth.json` contains bearer credentials (`access` and `refresh`) and should be treated as a secret.
 - Do not share, commit, or upload `auth.json` to source control or external services.
 - This repository already ignores `auth.json` via `.gitignore`, but you remain responsible for handling exported logs/backups safely.
-
-## Scope / Non-goals
-
-- This is a minimal sample for OAuth access to WHAM from Python, not a production-ready auth framework.
-- Device-code (headless) authentication is out of scope for the current implementation.
-- The API behavior described here is unofficial and may change without notice.
 
 ## WHAM API Specifics
 
