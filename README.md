@@ -8,18 +8,21 @@ available at `https://chatgpt.com/backend-api/wham`. It requires OAuth tokens ra
 standard API keys and uses an API surface that differs from the public Chat Completions API.
 A ChatGPT **Pro or Plus** account is required (subject to change).
 
-The sample implementation is in `codex_oauth.py`.
+The sample implementation is in [codex_oauth.py](codex_oauth.py).
 
 > **Note**: The API behavior documented here was reverse-engineered from the
 > [Codex CLI](https://github.com/openai/codex) and [OpenCode](https://github.com/anomalyco/opencode)
 > source code and is not officially documented by OpenAI.
->
-> **Warning**: As of the time this repository was created, OpenAI does not explicitly
-> prohibit third-party OAuth usage with these credentials, but this may change at any time.
-> This repository is provided **"AS IS"**, with **NO WARRANTY** of any kind (express or
-> implied), including but not limited to merchantability, fitness for a particular purpose,
-> and non-infringement. You are solely responsible for any use or consequences.
+> As of the time this repository was created, OpenAI does not explicitly
+> prohibit third-party OAuth usage with these credentials, but this policy may change at any time.
 > **USE AT YOUR OWN RISK.**
+
+## Disclaimer
+
+This repository is provided **AS IS**, with **NO WARRANTY** of any kind (express or
+implied), including but not limited to merchantability, fitness for a particular purpose,
+and non-infringement. You assume all risks and are solely responsible for any use,
+misuse, or consequences arising from it.
 
 ## Requirements
 
