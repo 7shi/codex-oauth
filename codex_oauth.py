@@ -146,9 +146,9 @@ def cmd_login():
     from urllib.parse import parse_qs, urlparse
     from authlib.integrations.httpx_client import OAuth2Client
 
-    # REDIRECT_URI and SCOPE are used only inside cmd_login.
-    REDIRECT_URI = "http://localhost:1455/auth/callback"
+    # SCOPE and REDIRECT_URI are used only inside cmd_login.
     SCOPE        = "openid profile email offline_access"
+    REDIRECT_URI = "http://localhost:1455/auth/callback"
 
     # authlib's OAuth2Client does not auto-add code_challenge even when
     # code_challenge_method="S256" is passed to the constructor, so generate manually.

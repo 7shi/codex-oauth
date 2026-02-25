@@ -52,6 +52,12 @@ uv run codex_oauth.py list            # fetch available models, saves models.jso
 
 The `test` and `list` commands automatically refresh the OAuth token before making API requests if it is expired or near expiry.
 
+### Security Notes
+
+- `auth.json` contains bearer credentials (`access` and `refresh`) and should be treated as a secret.
+- Do not share, commit, or upload `auth.json` to source control or external services.
+- This repository already ignores `auth.json` via `.gitignore`, but you remain responsible for handling exported logs/backups safely.
+
 ### Troubleshooting
 
 - Browser launch/callback issues (`login`): this implementation requires a local browser-based OAuth flow via `http://localhost:1455/auth/callback`.
@@ -59,16 +65,10 @@ The `test` and `list` commands automatically refresh the OAuth token before maki
 - `CSRF error: state mismatch`: retry `login` from scratch and complete the callback in the same browser session.
 - HTTP 401 during `test`/`list`: token refresh is attempted automatically once; if it still fails, run `login` again to regenerate `auth.json`.
 
-### Security Notes
-
-- `auth.json` contains bearer credentials (`access` and `refresh`) and should be treated as a secret.
-- Do not share, commit, or upload `auth.json` to source control or external services.
-- This repository already ignores `auth.json` via `.gitignore`, but you remain responsible for handling exported logs/backups safely.
-
 ## WHAM API Specifics
 
 **WHAM** (Workspace-Handled Agent Model) is an internal backend used by the Codex CLI.
-It requires OAuth tokens rather than standard API keys and uses an API surface that differs from the public Chat Completions API.
+It requires OAuth tokens rather than standard API keys and uses the Responses API.
 
 ### Endpoints & Constants
 
@@ -140,7 +140,7 @@ its first argument so it can call `make_client()` with the updated token after a
 
 ### Responses API (`cmd_test`)
 
-Three requirements differ from the standard Chat Completions API:
+Three requirements are specific to WHAM's use of the standard Responses API:
 
 - Content type must be `"input_text"` — `"text"` is rejected
 - `store=False` is mandatory — omitting it causes an error
