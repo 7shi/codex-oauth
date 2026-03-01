@@ -41,16 +41,41 @@ dependencies = [
 
 ## Setup & Usage
 
+Install or clone the repository:
+
 ```bash
+# To clone and develop this project.
+git clone https://github.com/7shi/codex-oauth.git
+cd codex-oauth
 uv sync
 
-uv run codex_oauth.py login           # browser OAuth, saves auth.json
-uv run codex_oauth.py test            # connection test
-uv run codex_oauth.py test -m <slug>  # specify model
-uv run codex_oauth.py list            # fetch available models, saves models.json
+# In another project, add directly from Git.
+uv add https://github.com/7shi/codex-oauth.git
 ```
 
+Run the available commands:
+
+```bash
+uv run codex_oauth login          # browser OAuth, saves auth.json
+uv run codex_oauth test           # connection test
+uv run codex_oauth test -m <slug> # specify model
+uv run codex_oauth list           # fetch available models, saves models.json
+```
+
+> **Note**: The direct file form (`uv run codex_oauth.py`) and the module form
+> (`uv run python -m codex_oauth`) are equivalent alternatives.
+
 The `test` and `list` commands automatically refresh the OAuth token before making API requests if it is expired or near expiry.
+
+### Library usage
+
+```python
+from codex_oauth import AuthManager
+
+auth = AuthManager()
+auth.ensure_valid()
+client = auth.make_client()
+```
 
 ### Security Notes
 

@@ -3,9 +3,24 @@ name = "codex_oauth"
 version = "0.0.1"
 description = "Sample OAuth implementation for OpenAI's WHAM backend"
 readme = "README.md"
+license = { text = "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication" }
+repository = "https://github.com/7shi/codex-oauth"
 requires-python = ">=3.13"
 dependencies = [
     "authlib>=1.6.8",
     "httpx>=0.28.1",
     "openai>=2.21.0",
 ]
+
+[project.scripts]
+codex_oauth = "codex_oauth:main"
+
+[build-system]
+requires = ["hatchling>=1.26.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+include = ["codex_oauth.py"]
+
+[tool.hatch.build.targets.sdist]
+include = ["codex_oauth.py", "README.md", "LICENSE", "pyproject.toml"]

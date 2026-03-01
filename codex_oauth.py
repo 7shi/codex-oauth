@@ -18,6 +18,12 @@ CLIENT_VER  = "0.0.1"
 # seconds before expiry to trigger refresh
 SAFETY_MARGIN = 30
 
+__all__ = [
+    "AuthManager",
+    "extract_account_id",
+    "cmd_login",
+]
+
 
 def extract_account_id(id_token: str | None, access_token: str | None) -> str | None:
     """Extract account_id from JWT with 3-level fallback.
@@ -308,14 +314,14 @@ def cmd_list(auth):
         print(model["slug"])
 
 
-if __name__ == "__main__":
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="command", required=True)
     subparsers.add_parser("login")
     test_parser = subparsers.add_parser("test")
     test_parser.add_argument("-m", "--model", default="gpt-5.1-codex-mini")
     subparsers.add_parser("list")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     if args.command == "login":
         cmd_login()
@@ -325,3 +331,8 @@ if __name__ == "__main__":
             auth.auto_refresh(cmd_test, args.model)
         elif args.command == "list":
             auth.auto_refresh(cmd_list)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
