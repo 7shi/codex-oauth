@@ -9,8 +9,8 @@ wheels/
 # Virtual environments
 .venv
 
-# Generated files
-models.json
-
 # Auth credentials
 auth.json
+auth.json.old
+auth.json.lock
+host.json

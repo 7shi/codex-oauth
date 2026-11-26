@@ -1,15 +1,15 @@
 [project]
 name = "codex_oauth"
-version = "0.0.1"
-description = "Sample OAuth implementation for OpenAI's WHAM backend"
+version = "0.1.0"
+description = "Sample implementation of Sign in with ChatGPT (plan usage) for open-source apps"
 readme = "README.md"
 license = { text = "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication" }
 repository = "https://github.com/7shi/codex-oauth"
 requires-python = ">=3.13"
 dependencies = [
-    "authlib>=1.6.8",
     "httpx>=0.28.1",
     "openai>=2.21.0",
+    "pyjwt[crypto]>=2.10",
 ]
 
 [project.scripts]
@@ -24,3 +24,8 @@ include = ["codex_oauth.py"]
 
 [tool.hatch.build.targets.sdist]
 include = ["codex_oauth.py", "README.md", "LICENSE", "pyproject.toml"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
