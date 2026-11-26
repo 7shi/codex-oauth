@@ -11,6 +11,12 @@ requests against their ChatGPT plan, without an API key. The sample implementati
 - It manages one ChatGPT account per credential file (no account picker).
 - Device-code (headless) sign-in is out of scope; no official equivalent exists for this flow.
 
+For practical use, see [llm7shi](https://github.com/7shi/llm7shi), which builds on the findings of
+this repository. Its `chatgpt:` provider runs models on the ChatGPT plan. Unlike this sample, its
+sign-in opens the browser and receives the callback on a loopback listener; pasting the redirected
+URL remains available with `--url` for SSH sessions and VMs. It also stores the tokens encrypted
+under a key in the OS keyring.
+
 > **About the name**: `codex-oauth` is historical. Versions up to 0.0.1 reused the Codex CLI
 > client ID and an undocumented backend. Since 0.1.0 the code uses only the officially documented
 > flow and no Codex credentials.
